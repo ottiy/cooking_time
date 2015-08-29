@@ -1,5 +1,7 @@
 package com.example.ochiai.cookingtime;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -7,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.Timer;
@@ -17,6 +20,9 @@ public class MainActivity extends ActionBarActivity {
 
     TextView mTimeTextView;
     TextView mResultTextView;
+    TextView start;
+
+    boolean startBotunIsStart;
 
     Timer mTimer;
 
@@ -31,40 +37,60 @@ public class MainActivity extends ActionBarActivity {
 
         mTimeTextView = (TextView)findViewById(R.id.textView);
         mResultTextView = (TextView)findViewById(R.id.textView2);
+        start = (TextView)findViewById(R.id.start);
+
+        startBotunIsStart = true;
 
         mTime = 0;
 
         mHandler = new Handler();
     }
 
-    public void start(View v){
-        mTime = 10;
+    public void start(View v) {
+        if (startBotunIsStart == true) {
+            start.setText("ストップ");
+            mTimeTextView.setText("ここに記録が表示されます");
+            mResultTextView.setText("判定！！");
 
-        mTimer =new Timer(false);
-        mTimer.schedule(new TimerTask(){
-            @Override
-            public void run () {
-                mHandler.post(new Runnable(){
-                    @Override
-                    public void run() {
-                        mTime--;
-                    }
-                });
+            mTime = 10;
+            mTimer = new Timer(false);
+            mTimer.schedule(
+                    new TimerTask() {
+                        @Override
+                        public void run() {
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mTime--;
+                                }
+                            });
+                        }
+                    }, 0, 1000);
+            startBotunIsStart =false;
+        } else {
+            switch (mTime) {
+
+
+                case 0:
+                    mTimeTextView.setText(mTime + "秒");
+                    mResultTextView.setText("時間測定（タイマー）レベル１！");
+                    Toast.makeText
+                            (getApplicationContext(), "架空の能力です", Toast.LENGTH_SHORT)
+                            .show();
+
+                    break;
+                default:
+                    mTimeTextView.setText("誤差"+mTime+"秒");
+                    mResultTextView.setText("あなたは無能力者レベル０です。");
+
+                    break;
             }
-        },0,1000);
-    }
 
-    public void stop (View v){
+            startBotunIsStart = true;
 
-        switch (mTime){
-            case 0:
-                mResultTextView.setText(String.valueOf(mTime));
-                mResultTextView.setText("君には時間を計る能力がある！！ちなみに level5(天才)だ");
-                break;
-
-            default:
-                mTimeTextView.setText(String.valueOf(mTime));
-                mResultTextView.setText("あーほ　バーカ");
+            start.setText("再スタート");
+            mTimer.cancel();
+            mTime = 0;
         }
     }
 

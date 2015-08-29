@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
@@ -16,28 +16,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textView" />
+            android:text="ここに記録が表示されます"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="スタート"
             android:id="@+id/start"
-            android:onClick="start" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ストップ"
-            android:id="@+id/stop"
-            android:onClick="stop" />
+            android:onClick="start"
+            android:layout_gravity="center_horizontal" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textView2" />
+            android:id="@+id/textView2"
+            android:layout_gravity="center_horizontal"
+            android:text="判定！！" />
     </LinearLayout>
 </RelativeLayout>
