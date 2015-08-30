@@ -35,5 +35,14 @@
             android:id="@+id/textView2"
             android:layout_gravity="center_horizontal"
             android:text="判定！！" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned"
+            android:ems="10"
+            android:id="@+id/editText"
+            android:layout_gravity="center_horizontal"
+            android:hint="秒数を変える" />
     </LinearLayout>
 </RelativeLayout>

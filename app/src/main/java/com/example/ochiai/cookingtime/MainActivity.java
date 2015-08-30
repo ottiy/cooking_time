@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,8 @@ public class MainActivity extends ActionBarActivity {
     TextView mTimeTextView;
     TextView mResultTextView;
     TextView start;
+
+    EditText mTimeChange;
 
     boolean startBotunIsStart;
 
@@ -39,9 +42,10 @@ public class MainActivity extends ActionBarActivity {
         mResultTextView = (TextView)findViewById(R.id.textView2);
         start = (TextView)findViewById(R.id.start);
 
+        mTimeChange = (EditText)findViewById(R.id.editText);
+
         startBotunIsStart = true;
 
-        mTime = 0;
 
         mHandler = new Handler();
     }
@@ -52,7 +56,8 @@ public class MainActivity extends ActionBarActivity {
             mTimeTextView.setText("ここに記録が表示されます");
             mResultTextView.setText("判定！！");
 
-            mTime = 10;
+            mTime = Integer.parseInt(mTimeChange.getText().toString());
+
             mTimer = new Timer(false);
             mTimer.schedule(
                     new TimerTask() {
